@@ -7,7 +7,7 @@ plugins:
 # END # TO USE JEKYLL LIBDOC LOCALLY AS REMOTE THEME
 title: c-scrollspy.js # title of the documentation
 description: >- # Description of the docs. (>- means to ignore newlines until next param)
-  Documentation de la librairie c-preview.js dédiée à la détection de la position d’un élément DOM dans la fenêtre de visualisation
+  Documentation de la librairie c-scrollspy.js dédiée à la détection de la position d’un élément DOM dans la fenêtre de visualisation
 # baseurl: "/c-scrollspy.js/_site" # the subpath of your site, e.g. /blog
 # url: "http://192.168.1.54" # the base hostname & protocol for your site, e.g. http://example.com
 #permalink: /:path/:basename/:output_ext
