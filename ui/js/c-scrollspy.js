@@ -5,69 +5,7 @@
 * https://github.com/ita-design-system/c-scrollspy.js
 */
 const cScrollspy = {
-    defaults: {
-        options: null,
-        callback: function(data) {
-            // console.log('callback par défaut invoqué');
-        }
-    },
-    custom_parameters: {
-        /**
-        * SCROLLER
-        * Settings for scroll snap type container
-        */
-        scroller: {
-            options: {
-                threshold: [0.8]
-            },
-            callback: function(data) {
-                // console.log(data);
-                // Id of the tracked target element
-                // const id = data[0].target.id;
-                // console.log(id, data[0].target.dataset.targetId, data[0].intersectionRatio);
-                // 
-                const target_id = data[0].target.dataset.targetId;
-                if (cScrollspy.custom_parameters.scroller.elements === undefined) {
-                    cScrollspy.custom_parameters.scroller.elements = {};
-                }
-                if (cScrollspy.custom_parameters.scroller.elements[target_id] === undefined) {
-                    cScrollspy.custom_parameters.scroller.elements[target_id] = document.querySelector('#'+target_id);
-                }
-                // Alias
-                const el_target_id = cScrollspy.custom_parameters.scroller.elements[target_id];
-                // Work only if a target exists
-                if (el_target_id !== null) {
-                    // If listener is not already set
-                    if (el_target_id.onclick === null) {
-                        // Get the command (previous or next) through the attriblue aria-command
-                        // aria-command="previous" adds a listerner that scroll to previous element
-                        // aria-command="next" adds a listerner that scroll to next element
-                        const target_command = el_target_id.getAttribute('aria-command');
-                        if (target_command == 'next' || target_command == 'previous') {
-                            el_target_id.addEventListener('click', function(el) {
-                                // get the with of the element and use it as default increment/decrement amount of scroll
-                                const width_of_el = data[0].target.clientWidth;
-                                const current_scroll_left = data[0].target.parentElement.scrollLeft;
-                                // console.log(width_of_el, current_scroll_left);
-                                let amount_of_scroll = current_scroll_left + width_of_el;
-                                if (target_command == 'previous') {
-                                    amount_of_scroll = current_scroll_left - width_of_el;
-                                }
-                                data[0].target.parentElement.scrollTo({
-                                    behavior: 'smooth',
-                                    left: amount_of_scroll
-                                });
-                            });
-                        }
-                    }
-                    if (data[0].intersectionRatio > 0.8) {
-                        el_target_id.classList.add('u-disabled');
-                    } else {
-                        el_target_id.classList.remove('u-disabled');
-                    }
-                }
-            }
-        },
+    callbacks: {
         /**
         * ANCHORS
         * Options for anchors links -> HTML ids
@@ -82,18 +20,23 @@ const cScrollspy = {
             * @arg {(object)} data event data returned by intersectonObserver
             */
             callback: function(data) {
-                // Id of the tracked target element
+                // Id of the tracked tracked element
                 const id = data[0].target.id;
-                // console.log(id);
-
-                // myScrollspy.custom_parameters.anchors.tracked_elements_y[id] = data[0].boundingClientRect.y;
-
+                // Optional active classes
+                let active_class_attribute = data[0].target.dataset.activeClass;
+                let origin_class_attribute = data[0].target.getAttribute('class') || '';
+                if (active_class_attribute === undefined) {
+                    active_class_attribute = 'active';
+                } else {
+                    // Custom class detected, save once origin class attribute
+                    if (data[0].target.dataset.classOrigin === undefined) {
+                        data[0].target.dataset.classOrigin = origin_class_attribute;
+                    }
+                }
                 // Write intersection ratio into an custom object
-                cScrollspy.custom_parameters.anchors.intersections[id] = data[0].intersectionRatio;
+                cScrollspy.callbacks.anchors.intersections[id] = data[0].intersectionRatio;
                 // Get current id => intersection values
-                const current_intersections = cScrollspy.custom_parameters.anchors.intersections;
-
-                
+                const current_intersections = cScrollspy.callbacks.anchors.intersections;
                 // Sort intersection values
                 const intersections_sorted = Object.keys(current_intersections).sort(function(a,b){return current_intersections[b]-current_intersections[a]});
                 // Get the id of the first/highest intersection value
@@ -104,16 +47,24 @@ const cScrollspy = {
                 intersections_sorted.forEach(function(id, index) {
                     // Search for all anchors links pointing to this id
                     document.querySelectorAll('[href="#'+id+'"]').forEach(function(el_anchor) {
-                        // Remove active class name
-                        el_anchor.classList.remove('active');
                         // The value of the first/highest intersection
-                        const first_intersection_id_value = cScrollspy.custom_parameters.anchors.intersections[first_intersection_id];
+                        const first_intersection_id_value = cScrollspy.callbacks.anchors.intersections[first_intersection_id];
                         // The value of the second/highest intersection
-                        const second_intersection_id_value = cScrollspy.custom_parameters.anchors.intersections[second_intersection_id];
-                        // If it is the highest intersection, apply active class
-                        // Second intersection must be inferior to first intersection value to avoid "active" class mismatch
-                        if (first_intersection_id == id && second_intersection_id_value < first_intersection_id_value) {
-                            el_anchor.classList.add('active');
+                        const second_intersection_id_value = cScrollspy.callbacks.anchors.intersections[second_intersection_id];
+                        if (Object.keys(intersections_sorted).length > 1) {
+                            // If it is the highest intersection, apply active class
+                            // Second intersection must be inferior to first intersection value to avoid "active" class mismatch
+                            if (first_intersection_id == id && second_intersection_id_value < first_intersection_id_value) {
+                                el_anchor.setAttribute('class', origin_class_attribute);
+                            } else {
+                                el_anchor.setAttribute('class', active_class_attribute);
+                            }
+                        } else {
+                            if (first_intersection_id_value > 0) {
+                                el_anchor.setAttribute('class', active_class_attribute);
+                            } else {
+                                el_anchor.setAttribute('class', origin_class_attribute);
+                            }
                         }
                     });
                 });
@@ -128,38 +79,25 @@ const cScrollspy = {
     // Method to invoke at start and each time DOM has changed
     update: function() {
         // Iterate all the scrollspy attributes
-        document.querySelectorAll('[my-scrollspy]').forEach(function(el, index) {
+        document.querySelectorAll('[c-scrollspy]').forEach(function(el, index) {
             // Value = custom option name for the current tracked element
-            const custom_params_name = el.getAttribute('my-scrollspy');
-            // Custom parameter must be an object
-            if (typeof cScrollspy.custom_parameters[custom_params_name] == 'object') {
-                // Set default options for intersectionObserver
-                let instance_options = cScrollspy.defaults.options;
-                // If custom options is an object, then use it
-                if (typeof cScrollspy.custom_parameters[custom_params_name]['options'] == 'object') {
-                    // console.log('options trouvées dans les paramètres');
-                    instance_options = cScrollspy.custom_parameters[custom_params_name]['options'];
+            const callback_name = el.getAttribute('c-scrollspy');
+            let callback_object = cScrollspy.callbacks.anchors;
+            if (typeof cScrollspyCallbacks == 'object') {
+                if (typeof cScrollspyCallbacks[callback_name] == 'object') {
+                    callback_object = cScrollspyCallbacks[callback_name];
                 }
-                // Set default callback for intersectionObserver
-                let instance_callback = cScrollspy.defaults.callback;
-                // If custom callback is a function, then use it
-                if (typeof cScrollspy.custom_parameters[custom_params_name]['callback'] == 'function') {
-                    // console.log('callback ok');
-                    instance_callback = cScrollspy.custom_parameters[custom_params_name]['callback'];
-                }
-                // Set default instance id
-                let instance_id = 'spy_'+index;
-                // If tracked element has an id, use it
-                if (el.id != '') {
-                    instance_id = el.id;
-                }
-                // Create intersection observer as an object into myScrollspy
-                cScrollspy.instances[instance_id] = new IntersectionObserver(instance_callback, instance_options);
-                // Track element
-                cScrollspy.instances[instance_id].observe(el);
-            } else {
-                console.log('paramètres perso non définis :'+custom_params_name);
             }
+            // Set default instance id
+            let instance_id = 'cspy_'+index;
+            // If tracked element has an id, use it
+            if (el.id != '') {
+                instance_id = el.id;
+            }
+            // Create intersection observer as an object into myScrollspy
+            cScrollspy.instances[instance_id] = new IntersectionObserver(callback_object.callback, callback_object.options);
+            // Track element
+            cScrollspy.instances[instance_id].observe(el);
         });
     }
 }
