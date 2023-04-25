@@ -4,7 +4,9 @@
 
 Librairie JS dédiée à la détection de la position d'un élément DOM dans la fenêtre de visualisation
 
-[Démo](https://ita-design-system.github.io/c-scrollspy.js/)
+* [Démo](https://ita-design-system.github.io/c-scrollspy.js/)
+* [Exemple d'usage carrousel](https://ita-design-system.github.io/c-scrollspy.js/content/slider.html)
+* [Exemple callback personnalisé](https://ita-design-system.github.io/c-scrollspy.js/content/custom-callback.html)
 
 ## Installation
 
