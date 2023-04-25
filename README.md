@@ -99,7 +99,7 @@ Il est possible de spécifier la classe de remplacement avec l'attribut `data-ac
 
 ### Callback personnalisé
 
-cScrollspyCallbacks object is available when c-scrollspy.js is set on the document. Write your own callbacks to fit your needs.
+L'objet cScrollspyCallbacks est disponible quand c-scrollspy.js est instancié sur le document. Vous pouvez écrire et utiliser vos propres callbacks en fonction de vos besoins.
 
 Exemple de callback vierge: [démo](https://ita-design-system.github.io/c-scrollspy.js/content/custom-callback.html)
 
