@@ -32,18 +32,18 @@ order: 20
         font-family: var(--ita-font-family-mono);
         font-size: 1rem;
         line-height: 1.5rem;
-        padding-bottom: 150vh;
     }
     nav {
-        text-align: center
+        width: 100%;
+        text-align: center;
     }
     ul {
+        width: 100%;
         list-style: none;
         padding: 1em;
         margin: 0 auto;
         display: flex;
         gap: 1em;
-        width: 100%;
         overflow: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
@@ -52,17 +52,18 @@ order: 20
         background-color: var(--ita-color-primary-100);
     }
     li {
-        aspect-ratio: 2;
-        min-width: 80%;
-        max-width: 80%;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 5em 2em;
+        box-sizing: border-box;
         scroll-snap-align: start;
+        scroll-margin-top: 100vh;
+        scroll-margin-left: 1em;
         display: flex;
         align-items: center;
         justify-content: center;
-        scroll-margin-top: 100vh;
-        scroll-margin-left: 1em;
-        border: 2px solid var(--ita-color-primary-500);
-        background-color: var(--ita-color-primary-200);
+        background-color: var(--ita-color-primary-500);
+        color: var(--ita-color-neutral-100);
     }
     a {
         color: var(--ita-color-primary-700);
