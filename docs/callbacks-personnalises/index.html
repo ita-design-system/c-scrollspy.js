@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks personnalisés</title>
+    
+
+    <meta itemprop="name" content="Callbacks personnalisés">
+    <meta name="description" itemprop="description" content="Exemples c-scrollspy avec callbacks personnalisés">
+    <meta name="application-name" content="Callbacks personnalisés">
+    <meta name="author" content="Olivier 3lanc">
+    <link rel="icon" type="image/png" href="/c-scrollspy.js/favicon.png">
+    
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+    
+    <!-- Microsoft -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="msapplication-starturl" content="/callbacks-personnalises/">
+    <meta name="msapplication-tooltip" content="Callbacks personnalisés">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/callbacks-personnalises/">
+    <meta property="og:title" content="Callbacks personnalisés">
+    <meta property="og:description" content="Exemples c-scrollspy avec callbacks personnalisés">
+    <meta property="og:image" content="https://og-image.vercel.app/c-scrollspy.js.png?theme=light&md=1&fontSize=140px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Callbacks personnalisés">
+    <meta name="twitter:description" content="Exemples c-scrollspy avec callbacks personnalisés">
+    <meta name="twitter:url" content="/callbacks-personnalises/">
+    <meta name="twitter:image" content="https://og-image.vercel.app/c-scrollspy.js.png?theme=light&md=1&fontSize=140px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fhyper-color-logo.svg">
+    
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-title" content="Callbacks personnalisés">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#FFFFFF">
+    
+    <!-- Android -->
+    <meta name="theme-color" content="#FFFFFF">
+    <meta name="color-scheme" content="light">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="generator" content="Eleventy v3.0.0">
+    
+    <link rel="stylesheet" href="/c-scrollspy.js/core/assets/css/ds__defaults.css">
+    <link rel="stylesheet" href="/c-scrollspy.js/core/assets/css/ds.css">
+    <link rel="stylesheet" href="/c-scrollspy.js/core/assets/css/hljs/night-owl.css">
+    <link rel="stylesheet" href="/c-scrollspy.js/core/assets/fonts/icomoon/style.css">
+    <style>
+        :root {
+            --ita-widths-sidebar: 300px;
+            --ita-widths-content: 700px;
+        }
+    </style>
+    <noscript>
+        <link rel="stylesheet" href="/c-scrollspy.js/core/assets/css/noscript.css">
+    </noscript>
+    
+    
+    
+    
+    <script>
+        const libdocMessages = {
+            
+                copiedToClipboard: `Copié dans le presse-papiers`,
+                code: `Code`,
+                copied: `Copié`,
+                copy: `Copier`,
+                copyCode: `Copier le code`,
+                copyHTML: `Copier le HTML`,
+                copyURL: `Copier l’URL`,
+                enable: `Activer`,
+                goToTopOfPage: `Aller en haut de page`,
+                height: `Hauteur`,
+                homepage: `Page d’accueil`,
+                homepageShort: `Accueil`,
+                inANewTab: `Dans un nouvel onglet`,
+                lastModified: `Dernière modification`,
+                menu: `Menu`,
+                open: `Ouvrir`,
+                openInANewTab: `Ouvrir dans un nouvel onglet`,
+                page: `Page`,
+                pages: `Pages`,
+                pagesTagged: `Pages taguées`,
+                reload: `Recharger`,
+                reloaded: `Rechargé`,
+                result: `Résultat`,
+                sandbox: `Bac à sable`,
+                sandboxResizeHelper: `Cliquer déplacer pour redimensionner code et résultat`,
+                search: `Rechercher`,
+                searchClear: `Effacer la saisie`,
+                searchMinimumCharacters: `3 caractères min.`,
+                searchResultsNoResultForQuery: `Aucun résultat pour la requête`,
+                searchOccurrencesCurrent: `Occurrence actuelle`,
+                searchOccurrencesNext: `Occurrence suivante`,
+                searchOccurrencesPrevious: `Occurrence précédente`,
+                searchOccurrencesStop: `Fermet la recherches d’occurrences`,
+                searchPlaceholder: `Texte à rechercher`,
+                searchSubmit: `Lancer la recherche`,
+                tableOfContent: `Table des matières`,
+                tag: `Tag`,
+                tagsList: `Liste des tags`,
+                tagsListDescription: `Liste de l’ensemble des tags disponibles`,
+                toggleFloatingToc: `Basculer la table des matières flottante`,
+                top: `Haut`,
+                width: `Largeur`,
+        }
+        const libdocConfig = {
+            searchIndexUrl: `/c-scrollspy.js/core/assets/js/search_index.json`
+        }
+    </script>
+</head>
+<body class="d-flex fd-column | m-0">
+    <div class="d-flex" fd-column="xs,sm" ai-start="md" ai-center="xs,sm" pl-5="md">
+        <div class="d-flex fd-column | pos-sticky top-0 z-2" ai-center="xs,sm" w-100="xs,sm" w-sidebar="md">
+            <nav id="nav_small_devices" class="d-flex | pos-fixed bottom-0 left-0 z-1 | w-100 h-60px" d-none="md">
+                <div class="d-flex jc-space-between | w-100 | bc-neutral-100 btwidth-1 btstyle-dashed bcolor-neutral-500">
+                    <a href="/c-scrollspy.js/" class="d-flex fd-column jc-center ai-center gap-1 | pl-5 pr-2 | td-none ta-center | c-primary-900 b-0 brad-3">
+                        <span class="icon-house fs-6"></span>
+                        <span class="fvs-wght-400 fs-1 tt-uppercase">Accueil</span>
+                    </a>
+                    
+                    <button type="button" id="sd_floating_toc_toggle_btn" class="d-flex fd-column jc-center ai-center gap-1 | pl-2 pr-2 | ta-center | cur-pointer c-primary-900 bc-neutral-100 b-0 brad-3" disabled="">
+                        <span class="icon-list-dashes fs-6"></span>
+                        <span class="fvs-wght-400 fs-1 tt-uppercase">Table des matières</span>
+                    </button>
+                    <button type="button" id="sd_gtt_btn" class="d-flex fd-column jc-center ai-center gap-1 | pl-2 pr-2 | ta-center | cur-pointer c-primary-900 bc-neutral-100 b-0 brad-3" onclick="libdocUi.handlers._clickGTT()">
+                        <span class="icon-arrow-line-up fs-6"></span>
+                        <span class="fvs-wght-400 fs-1 tt-uppercase">Haut</span>
+                    </button>
+                    <button type="button" class="d-flex fd-column jc-center ai-center gap-1 | pl-2 pr-5 | ta-center | cur-pointer c-primary-900 bc-neutral-100 b-0 brad-3" c-toggle="nav_primary" data-dismiss="true">
+                        <span class="icon-list fs-6" c-toggle-name="nav_primary" data-opened-state-class="icon-x fs-6"></span>
+                        <span class="fvs-wght-400 fs-1 tt-uppercase">Menu</span>
+                    </button>
+                </div>
+            </nav>
+            <nav id="nav_primary_container" class="d-flex d-none--xs d-none--sm fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500" mt-5="md" maxw-sidebar="md" brad-3="md" c-toggle-name="nav_primary" data-opened-state-class="d-flex fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500">
+                <menu id="nav_primary_header" class="d-flex fd-column | pos-sticky top-0 z-1 | m-0 p-0  | ls-none bc-neutral-100 bbwidth-1 bbstyle-dashed bcolor-neutral-500" gap-5="md" bradtl-3="md" bradtr-3="md">
+                    <li class="d-flex ai-center">
+                        
+                            <a href="/c-scrollspy.js/" class="p-5 | td-none fvs-wght-700 lsp-5 fs-8 tws-balance | c-neutral-900" title="Documentation de la librairie c-scrollspy.js dédiée à la détection de la position d’un élément DOM dans la fenêtre de visualisation">
+                                c-scrollspy.js
+                            </a>
+                        
+                    </li>
+                    
+                    
+                        <li class="d-flex ai-center fw-wrap gap-7 rgap-1 | pb-3 pl-4">
+                            
+                                <a href="https://github.com/ita-design-system/c-scrollspy.js" class="
+                                    d-flex ai-center gap-1
+                                    pt-2 pb-2
+                                    fvs-wght-600 fs-2 lsp-3 lh-1 tt-uppercase td-none
+                                    c-primary-600" target="_blank">
+                                    GitHub
+                                    <span class=""><span class="icon-arrow-square-out | pos-absolute t-tY-50 | c-primary-300"></span></span>
+                                </a>
+                            
+                                <a href="https://github.com/ita-design-system" class="
+                                    d-flex ai-center gap-1
+                                    pt-2 pb-2
+                                    fvs-wght-600 fs-2 lsp-3 lh-1 tt-uppercase td-none
+                                    c-primary-600" target="_blank">
+                                    ITADS
+                                    <span class=""><span class="icon-arrow-square-out | pos-absolute t-tY-50 | c-primary-300"></span></span>
+                                </a>
+                            
+                        </li>
+                    
+                </menu>
+                
+                
+
+                
+
+                
+
+
+
+
+
+
+<div id="nav_primary" class="pos-relative | fg-1 o-auto">
+    
+    <ol class="d-flex fd-column | m-0 pl-0 pt-3 pb-3 | ls-none"><li class="d-flex fw-wrap ai-center"><a href="/c-scrollspy.js/carrousel/" class="d-flex ai-center fg-1 | pos-relative | w-100 pt-2 pb-2 pr-6 | fs-3 td-none lh-5 tws-balance fvs-wght-500 | c-neutral-900 nav_primary__anchor">Carrousel</a></li>
+<li class="d-flex fw-wrap ai-center"><a href="/c-scrollspy.js/callbacks-personnalises/" aria-current="page" class="d-flex ai-center fg-1 | pos-relative | w-100 pt-2 pb-2 pr-6 | fs-3 td-none lh-5 tws-balance fvs-wght-500 | c-neutral-900 nav_primary__anchor">Callbacks personnalisés</a></li></ol>
+    
+</div>
+            </nav>
+        </div>
+        <main class="pos-relative" w-100-minus-sidebar="md" w-100="xs,sm">
+            <header class="d-flex fd-column | pt-5 pb-7">
+                <ul class="d-flex ai-center gap-2 | p-0 m-0 o-auto | fs-2 lh-3 | ls-none">
+    <li class="d-flex ai-center gap-2">
+        <a href="/c-scrollspy.js/" class="pos-relative | p-5 | fs-4 td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" title="Page d’accueil">
+            <span class="icon-house | pos-absolute top-50 left-50 t-tY-50 t-tX-50"></span>
+        </a> /
+    </li>
+    
+    
+    
+    <li class="c-neutral-800 ws-nowrap">Callbacks personnalisés</li>
+</ul>
+                <h1 class="mt-3 mb-0 | lsp-5 fvs-wght-700 tws-balance " fs-10="md" fs-9="xs,sm">
+                    Callbacks personnalisés
+                </h1>
+                
+                    <p class="d-flex ai-center fw-wrap gap-2 | pt-5 pl-5 pb-5 m-0 | fvs-wght-400 tws-balance fs-7 lsp-3 lh-5 | blwidth-1 blstyle-dashed bcolor-neutral-500" pt-3="xs" pb-3="xs" fs-6="sm" fs-5="xs">
+                        Exemples c-scrollspy avec callbacks personnalisés
+                    </p>
+                
+                
+                    
+                    <div class="d-flex ai-center | m-0 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                        <div class="pl-5 | bbwidth-1 bbstyle-dashed bcolor-neutral-500"></div>
+                        
+                            <p class="d-flex ai-center gap-2 | m-0 pr-2 | fvs-wght-400 fs-3 lsp-3 lh-3 | c-neutral-700 bc-primary-100" fs-2="xs">
+                                <span class="icon-calendar-dots fs-6"></span>
+                                <span ws-nowrap="sm,md">
+                                    <span class="ws-nowrap">Dernière modification</span>
+                                    2023-04-25
+                                </span>
+                            </p>
+                        
+                        <div class="pl-5 w-100 | bbwidth-1 bbstyle-dashed bcolor-neutral-500"></div>
+                        
+                            <div class="d-flex ai-center gap-3">
+                                <div class="pos-relative | p-5 | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500">
+                                    <div class="icon-user | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-6"></div>
+                                </div>
+                                <p class="d-flex fd-column | m-0 | fvs-wght-400 fs-3 lsp-3 lh-3 | c-neutral-700 bc-primary-100" fs-2="xs" ws-nowrap="sm,md" style="min-width: 10ch">
+                                    Olivier 3lanc
+                                </p>
+                            </div>
+                        
+                    </div>
+                
+                
+            </header>
+            <aside class="d-flex | sandbox" fd-column="xs,sm" gap-2="xs,sm" ai-start="xs,sm" o-hidden="md" pl-9="md" pr-9="md" pl-5="xs,sm" pr-5="xs,sm">
+<div class="d-flex | p-1 | bc-primary-200 brad-2" d-none="md">
+<button type="button" class="d-flex | pt-2 pb-2 pl-5 pr-5 | fvs-wght-400 fs-2 tt-uppercase | c-primary-900 bc-0 b-0 cur-pointer | sandbox__tab" data-name="code">
+Code
+</button>
+<button type="button" class="d-flex | pt-2 pb-2 pl-5 pr-5 | fvs-wght-400 fs-2 tt-uppercase | c-primary-900 bc-neutral-100 b-0 brad-1 cur-pointer | sandbox__tab" data-name="iframe">
+Résultat
+</button>
+</div>
+<div class="d-flex fd-column d-none--xs d-none--sm | o-hidden | bc-neutral-900 c-neutral-200 brad-3 bwidth-1 bstyle-solid bcolor-neutral-900 | sandbox__code_wrapper" w-50="md" w-100="xs,sm" bradtr-0="md" bradbr-0="md">
+<header class="d-flex jc-space-between | pl-5" style="height: 58px">
+<p class="d-flex ai-center | m-0 | fvs-wght-400 fs-3 lh-1 | c-neutral-600" fs-2="xs">
+Carrousel
+</p>
+<button type="button" class="d-flex ai-center | pl-5 pr-5 | fvs-wght-400 fs-2 tt-uppercase | bc-0 c-neutral-300 b-0 cur-pointer | sandbox__copy_code" title="Copier le HTML">
+<span class="o-hidden | to-ellipsis ws-nowrap">Copier</span>
+</button>
+</header>
+<div class="pos-relative" pl-5="md">
+<pre class="m-0 h-500px o-auto" bradtl-3="md" bradbl-3="md">
+<code class="language-html fvs-mono-on fvs-wght-300 fs-3 lh-6 | sandbox__code" fs-2="xs">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;c-scrollspy callback personnalisé&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            padding: 2em;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif; 
+            line-height: 1.5em;
+            background-color: ghostwhite;
+            padding-bottom: 150vh;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: dodgerblue;
+        }
+        nav a {
+            color: white;
+            padding: 1em 2em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        a.active {
+            color: yellow;
+        }
+        a.active-2 {
+            color: green;
+        }
+        a.active-3 {
+            color: fuchsia;
+        }
+        section {
+            height: 130vh;
+            padding: 3em;
+            background-color: #EEE;
+            margin-bottom: 3em;
+            scroll-margin-top: 40px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section c-scrollspy=&quot;mostSimple&quot;&gt;
+        &lt;h2&gt;Callback personnalisé mostSimple&lt;/h2&gt;
+        &lt;p&gt;Ce callback personnalisé appelé &quot;mostSimple&quot; retourne un simple console.log(data) de l'IntersectionObserver (voir la console).&lt;/p&gt;
+        &lt;p&gt;Si les options ne sont pas spécifiées, comme sur cet exemple, cScrollspy utilise les options du callback anchor.&lt;/p&gt;
+    &lt;/section&gt;
+    
+    &lt;section c-scrollspy=&quot;multipleThesholds&quot;&gt;
+        &lt;h2&gt;Callback personnalisé multipleThesholds&lt;/h2&gt;
+        &lt;p&gt;Ce callback personnalisé appelé &quot;multipleThesholds&quot; modifie la couleur de l'arrière-plan à chaque seuil.&lt;/p&gt;
+    &lt;/section&gt;
+    
+    &lt;section c-scrollspy=&quot;multipleThesholds&quot;&gt;
+        &lt;h2&gt;Callback personnalisé multipleThesholds seconde instance&lt;/h2&gt;
+        &lt;p&gt;Modifie la couleur de l'arrière-plan à chaque seuil.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;script src=&quot;/assets/c-scrollspy.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/assets/c-scrollspy-callbacks.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<div class="d-flex jc-center ai-center | pos-absolute top-0 left-0 | w-100 h-100 | sandbox__enable_wrapper" style="background-color: rgba(0,0,0,0.5)">
+<input type="checkbox" id="RINF4Jm3_code" value="" class="pos-absolute | opa-0 | sandbox__enable_switch" checked="">
+<label for="RINF4Jm3_code" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
+<span class="icon-play"></span>
+Activer
+</label>
+</div>
+</div>
+<div class="d-flex gap-2 | m-0 pt-1 pb-1 pl-0 | fvs-wght-400 fs-2 lh-1 | c-neutral-500 ls-none" pl-2="xs,sm">
+ 
+</div>
+</div>
+<button class="pos-relative | p-0 | bc-neutral-800 c-neutral-500 b-0 | sandbox__resizer" title="Cliquer déplacer pour redimensionner code et résultat" d-none="xs,sm">
+<span class="icon-dots-six-vertical fs-5"></span>
+</button>
+<div class="d-flex fd-column | pos-relative | o-hidden | bc-neutral-900 c-neutral-200 brad-3 bwidth-1 bstyle-solid bcolor-neutral-900 | sandbox__iframe_wrapper" w-50="md" w-100="xs,sm" bradtl-0="md" bradbl-0="md" style="box-sizing: content-box"><header class="d-flex jc-space-between gap-5 | pl-5 pr-5" style="height: 58px">
+<a href="/c-scrollspy.js/sandboxes/2/" target="_blank" title="Ouvrir dans un nouvel onglet" class="d-flex ai-center gap-1 | p-0 | fvs-wght-400 fs-2 tt-uppercase td-none | sandbox__permalink" fs-2="xs">
+<span class="fvs-wght-400 | c-neutral-300">Ouvrir</span>
+<span class="icon-arrow-square-out c-neutral-500"></span>
+</a>
+<div class="d-flex gap-5">
+<button type="button" class="d-flex ai-center | p-0 | fvs-wght-400 fs-2 tt-uppercase | bc-0 c-neutral-300 b-0 cur-pointer | sandbox__reload">
+<span class="o-hidden | to-ellipsis ws-nowrap">Recharger</span>
+</button>
+<button type="button" class="d-flex ai-center | p-0 | fvs-wght-400 fs-2 tt-uppercase | bc-0 c-neutral-300 b-0 cur-pointer | sandbox__copy_url">
+<span class="o-hidden | to-ellipsis ws-nowrap">Copier l’URL</span>
+</button>
+</div>
+</header>
+<div class="d-flex | pos-relative">
+<iframe src="/c-scrollspy.js/sandboxes/2/" loading="lazy" class="w-100 h-500px | b-0 bc-neutral-100 | sandbox__iframe"></iframe>
+<div class="d-flex jc-center ai-center | pos-absolute top-0 left-0 | w-100 h-100 | sandbox__enable_wrapper" style="background-color: rgba(0,0,0,0.5)">
+<input type="checkbox" id="RINF4Jm3_iframe" value="" class="pos-absolute | opa-0 | sandbox__enable_switch" checked="">
+<label for="RINF4Jm3_iframe" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
+<span class="icon-play"></span> Activer
+</label>
+</div>
+</div>
+<ul class="d-flex gap-2 | m-0 pt-1 pb-1 pl-2 | fvs-wght-400 fs-2 lh-1 | c-neutral-500 ls-none">
+<li>Largeur: <span class="sandbox__monitor__iframe_width">-</span>px</li>
+<li>Hauteur: <span class="sandbox__monitor__iframe_height">-</span>px</li>
+</ul>
+</div>
+</aside>
+
+            <footer class="minh-100vh">
+                <div class="pt-11 | bwidth-1 bstyle-dashed bcolor-neutral-500 btwidth-0 brwidth-0"></div>
+                <p class="mt-5 mb-0 | fs-2">
+                    <a href="https://github.com/ita-design-system/eleventy-libdoc" target="_blank" class="td-none">
+                        11ty LibDoc 0.1.0
+                    </a>
+                </p>
+            </footer>
+        </main>
+    </div>
+    
+    
+    <script src="/c-scrollspy.js/core/assets/js/c-toggle.js"></script>
+    <script src="/c-scrollspy.js/core/assets/js/sandbox.js"></script>
+    <script src="/c-scrollspy.js/core/assets/js/hljs/highlight.min.js"></script>
+    
+        <script src="/c-scrollspy.js/core/assets/js/hljs/languages/xml.min.js"></script>
+    
+        <script src="/c-scrollspy.js/core/assets/js/hljs/languages/javascript.min.js"></script>
+    
+        <script src="/c-scrollspy.js/core/assets/js/hljs/languages/yaml.min.js"></script>
+    
+        <script src="/c-scrollspy.js/core/assets/js/hljs/languages/css.min.js"></script>
+    
+    <script src="/c-scrollspy.js/core/assets/js/ui.js"></script>
+</body>
+</html>

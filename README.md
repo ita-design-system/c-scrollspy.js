@@ -1,12 +1,13 @@
-# c-scrollspy.js
-
+---
+title: c-scrollspy.js
+description: Documentation de la librairie c-scrollspy.js dédiée à la détection de la position d’un élément DOM dans la fenêtre de visualisation
+layout: libdoc_page.liquid
+permalink: index.html
+date: git Last Modified
+---
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/ita-design-system/c-scrollspy.js?style=for-the-badge)](https://github.com/ita-design-system/c-scrollspy.js/releases)
 
-Librairie JS dédiée à la détection de la position d'un élément DOM dans la fenêtre de visualisation
-
-* [Démo](https://ita-design-system.github.io/c-scrollspy.js/)
-* [Exemple d'usage carrousel](https://ita-design-system.github.io/c-scrollspy.js/content/slider.html)
-* [Exemple callback personnalisé](https://ita-design-system.github.io/c-scrollspy.js/content/custom-callback.html)
+{% include 'sandbox' path: '/sandboxes/1/index.html', title: 'Démo' %}
 
 ## Installation
 
@@ -15,42 +16,43 @@ Il est recommandé de placer les fichiers dans cet ordre avant la balise fin de 
 ### En local
 
 ```html
-<body>
-    <script src="/path/to/c-scrollspy.js"></script> <!-- obligatoire -->
-    <script src="/path/to/c-scrollspy-callbacks.js"></script> <!-- optionnel -->
-</body>
+<script src="/path/to/c-scrollspy.js"></script> <!-- obligatoire -->
+<script src="/path/to/c-scrollspy-callbacks.js"></script> <!-- optionnel -->
 ```
 
 ### Sur CDN
 
-via [https://www.jsdelivr.com/](https://www.jsdelivr.com/)
+Via [https://www.jsdelivr.com/](https://www.jsdelivr.com/)
+
+Version la plus récente:
 
 ```html
-<!-- Version la plus récente -->
 https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.js
-
-<!-- Version la plus récente minifiée -->
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.min.js
-
-<!-- Typologie avec numéro de version -->
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.js
-
-<!-- Typologie numéro de version + minification automatique -->
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.min.js
-
-<!-- Exemple v0.1.0 -->
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.js
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.min.js
 ```
 
-```html
-<body>
-    <!-- Exemple avec version la plus récente -->
-    <script src="https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.min.js"></script>
+Version la plus récente minifiée:
 
-    <!-- Exemple avec numéro de version -->
-    <script src="https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.min.js"></script>
-</body>
+```html
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.min.js
+```
+
+Typologie avec numéro de version:
+
+```html
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.js
+```
+
+Typologie numéro de version + minification automatique:
+
+```html
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.min.js
+```
+
+Exemple v0.1.0:
+
+```html
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.min.js
 ```
 
 ## Usage
@@ -59,7 +61,7 @@ c-scrollspy fonctionne avec [l'API de IntersectionObserver](https://developer.mo
 
 **Chaque callback dispose de ses propres paramètres**
 
-### Callback `anchor`
+## Callback anchor
 
 Avec le callback `anchor` (toujours inclus dans c-scrollspy.js), lorsque l'élément passe dans la fenêtre de visualisation, la classe des liens qui pointent vers cet élément est remplacée par "active". 
 
@@ -99,11 +101,9 @@ Il est possible de spécifier la classe de remplacement avec l'attribut `data-ac
 </section>
 ```
 
-### Callback personnalisé
+## Callback personnalisé
 
 L'objet cScrollspyCallbacks est disponible quand c-scrollspy.js est instancié sur le document. Vous pouvez écrire et utiliser vos propres callbacks en fonction de vos besoins.
-
-Exemple de callback vierge: [démo](https://ita-design-system.github.io/c-scrollspy.js/content/custom-callback.html)
 
 ```javascript
 // Minimal
@@ -120,7 +120,7 @@ cScrollspyCallbacks.myCustomCallbackName = {
 }
 ```
 
-Exemple de callback simple avec options personnalisées: [démo](https://ita-design-system.github.io/c-scrollspy.js/content/custom-callback.html)
+Exemple de callback simple avec options personnalisées: [démo](/content/custom-callback.md)
 
 ```javascript
 // Simple callback avec thresholds personnalisés
@@ -144,9 +144,7 @@ cScrollspyCallbacks.multipleThesholds = {
 }
 ```
 
-## Méthodes
-
-### `update()`
+## Méthode update
 
 Indispensable pour démarrer l'application, instancie les IntersectionObserver, s'exécute automatiquement sur le `DOMReady` et peut être invoqué à tout moment, à chaque changement de DOM.
 
