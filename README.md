@@ -15,7 +15,7 @@ Il est recommandé de placer les fichiers dans cet ordre avant la balise fin de 
 
 ### En local
 
-```html
+```html foo
 <script src="/path/to/c-scrollspy.js"></script> <!-- obligatoire -->
 <script src="/path/to/c-scrollspy-callbacks.js"></script> <!-- optionnel -->
 ```
