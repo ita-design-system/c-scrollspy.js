@@ -5,8 +5,6 @@ layout: libdoc_page.liquid
 permalink: index.html
 date: git Last Modified
 ---
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/ita-design-system/c-scrollspy.js?style=for-the-badge)](https://github.com/ita-design-system/c-scrollspy.js/releases)
-
 {% include 'sandbox' path: '/sandboxes/1/index.html', title: 'Démo' %}
 
 ## Installation

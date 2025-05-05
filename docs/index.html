@@ -9,7 +9,7 @@
     <meta itemprop="name" content="c-scrollspy.js">
     <meta name="description" itemprop="description" content="Documentation de la librairie c-scrollspy.js dédiée à la détection de la position d’un élément DOM dans la fenêtre de visualisation">
     <meta name="application-name" content="c-scrollspy.js">
-    <meta name="author" content="Olivier 3lanc">
+    <meta name="author" content="ITADS">
     <link rel="icon" type="image/png" href="/c-scrollspy.js/favicon.png">
     
     <meta name="msapplication-TileColor" content="#FFFFFF">
@@ -55,7 +55,13 @@
         :root {
             --ita-widths-sidebar: 300px;
             --ita-widths-content: 700px;
+            --ita-widths-main-container-max: calc(2 * var(--ita-widths-content) + var(--ita-widths-sidebar));
         }
+        
+            main img {
+                border-radius: 9px;
+            }
+        
     </style>
     <noscript>
         <link rel="stylesheet" href="/c-scrollspy.js/core/assets/css/noscript.css">
@@ -115,8 +121,8 @@
         }
     </script>
 </head>
-<body class="d-flex fd-column | m-0">
-    <div class="d-flex" fd-column="xs,sm" ai-start="md" ai-center="xs,sm" pl-5="md">
+<body class="d-flex fd-column ai-center | m-0">
+    <div class="d-flex | w-100" fd-column="xs,sm" ai-start="md" ai-center="xs,sm" pl-5="md" style="max-width: var(--ita-widths-main-container-max)">
         <div class="d-flex fd-column | pos-sticky top-0 z-2" ai-center="xs,sm" w-100="xs,sm" w-sidebar="md">
             <nav id="nav_small_devices" class="d-flex | pos-fixed bottom-0 left-0 z-1 | w-100 h-60px" d-none="md">
                 <div class="d-flex jc-space-between | w-100 | bc-neutral-100 btwidth-1 btstyle-dashed bcolor-neutral-500">
@@ -124,6 +130,11 @@
                         <span class="icon-house fs-6"></span>
                         <span class="fvs-wght-400 fs-1 tt-uppercase">Accueil</span>
                     </a>
+                    
+                        <a href="/c-scrollspy.js/search/" class="d-flex fd-column jc-center ai-center gap-1 | pl-2 pr-2 | td-none ta-center | c-primary-900 b-0 brad-3">
+                            <span class="icon-magnifying-glass fs-6"></span>
+                            <span class="fvs-wght-400 fs-1 tt-uppercase">Rechercher</span>
+                        </a>
                     
                     <button type="button" id="sd_floating_toc_toggle_btn" class="d-flex fd-column jc-center ai-center gap-1 | pl-2 pr-2 | ta-center | cur-pointer c-primary-900 bc-neutral-100 b-0 brad-3" disabled="">
                         <span class="icon-list-dashes fs-6"></span>
@@ -139,7 +150,7 @@
                     </button>
                 </div>
             </nav>
-            <nav id="nav_primary_container" class="d-flex d-none--xs d-none--sm fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500" mt-5="md" maxw-sidebar="md" maxh-sidebar="md" h-sidebar="xs,sm" brad-3="md" c-toggle-name="nav_primary" data-opened-state-class="d-flex fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500">
+            <nav id="nav_primary_container" class="d-flex d-none--xs d-none--sm fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 |  __soft-shadow" mt-5="md" maxw-sidebar="md" maxh-sidebar="md" h-sidebar="xs,sm" brad-3="md" c-toggle-name="nav_primary" data-opened-state-class="d-flex fd-column | w-100 o-hidden | bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500">
                 <menu id="nav_primary_header" class="
                     d-flex fd-column
                     pos-sticky top-0 z-1
@@ -153,6 +164,23 @@
                             </a>
                         
                     </li>
+                    
+                        <li d-none="xs,sm">
+                            <form action="/c-scrollspy.js/search/" class="d-flex fd-column | pos-relative | pl-5 pr-5 | search_form">
+                                <label for="searchInput" class="pos-absolute | ml-5 t-tY-50 | fvs-wght-400 fs-1 tt-uppercase | bc-neutral-100">
+                                    Rechercher
+                                </label>
+                                <input id="searchInput" type="search" name="search" class="pl-5 pr-5 pt-4 pb-4 | fs-3 | bc-neutral-100 brad-4 bwidth-1 bstyle-dashed bcolor-neutral-500" placeholder="Texte à rechercher" value="">
+                                <div class="d-flex ai-center gap-2 | pos-absolute top-0 right-0 | h-100 mr-5">
+                                    <button type="button" class="pos-relative | p-4 pr-5 | fs-3 | brad- bc-neutral-100 c-neutral-900 b-0 cur-pointer | search_form__clear_btn" title="Effacer la saisie" hidden="">
+                                        <span class="icon-x | pos-absolute top-50 left-50 t-tY-50 t-tX-50"></span>
+                                    </button>
+                                    <button type="submit" class="pos-relative | h-100 p-0 ar-square | fs-5 | brad-4 bc-primary-500 c-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-100 cur-pointer" title="Lancer la recherche">
+                                        <span class="icon-magnifying-glass | pos-absolute top-50 left-50 t-tY-50 t-tX-50"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
                     
                     
                         <li class="d-flex ai-center fw-wrap gap-7 rgap-1 | pb-3 pl-4">
@@ -191,16 +219,20 @@
         </div>
         <main class="pos-relative" w-100-minus-sidebar="md" w-100="xs,sm">
             <header class="d-flex fd-column | pt-5 pb-7">
-                <ul class="d-flex ai-center gap-2 | p-0 m-0 o-auto | fs-2 lh-3 | ls-none">
+                <ul class="d-flex ai-center gap-2 | p-0 m-0 | fs-2 lh-3 | ls-none">
     <li class="d-flex ai-center gap-2">
-        <a href="/c-scrollspy.js/" class="pos-relative | p-5 | fs-4 td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" title="Page d’accueil">
+        <a href="/c-scrollspy.js/" class="pos-relative | p-5 | fs-4 td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" title="Page d’accueil">
             <span class="icon-house | pos-absolute top-50 left-50 t-tY-50 t-tX-50"></span>
         </a> /
     </li>
-    
-    
-    
-    <li class="c-neutral-800 ws-nowrap">c-scrollspy.js</li>
+    <li class="o-auto">
+        <ul class="d-flex ai-center gap-2 | p-0 m-0 | fs-2 lh-3 | ls-none">
+            
+            
+            
+            <li class="c-neutral-800 ws-nowrap">c-scrollspy.js</li>
+        </ul>
+    </li>
 </ul>
                 <h1 class="mt-3 mb-0 | lsp-5 fvs-wght-700 tws-balance " fs-10="md" fs-9="xs,sm">
                     c-scrollspy.js
@@ -219,7 +251,7 @@
                                 <span class="icon-calendar-dots fs-6"></span>
                                 <span ws-nowrap="sm,md">
                                     <span class="ws-nowrap">Dernière modification</span>
-                                    2025-04-24
+                                    2025-04-25
                                 </span>
                             </p>
                         
@@ -230,7 +262,7 @@
                                     <div class="icon-user | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-6"></div>
                                 </div>
                                 <p class="d-flex fd-column | m-0 | fvs-wght-400 fs-3 lsp-3 lh-3 | c-neutral-700 bc-primary-100" fs-2="xs" ws-nowrap="sm,md" style="min-width: 10ch">
-                                    Olivier 3lanc
+                                    ITADS
                                 </p>
                             </div>
                         
@@ -247,52 +279,51 @@
                             </span>
                         </summary>
                         
-                <ol class="cgap-3em | m-0 pl-0 pb-5 o-auto | lh-1 | ls-none bwidth-1 bstyle-dashed bcolor-neutral-500 btwidth-0 brwidth-0" d-flex="xs,sm" fd-column="xs,sm" fw-wrap="xs,sm" columns-3="md" columns-2="sm" maxh-300px="sm" maxh-200px="xs">
-                    <li class="d-flex">
-                        <a href="#installation" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Installation
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#en-local" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            En local
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#sur-cdn" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Sur CDN
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#usage" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Usage
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#callback-anchor" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Callback anchor
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#callback-personnalis" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Callback personnalisé
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#mthode-update" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            Méthode update
-                        </a>
-                    </li>
-                    <li class="d-flex">
-                        <a href="#api" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
-                            API
-                        </a>
-                    </li></ol>
+                    <ol class="cgap-3em | m-0 pl-0 pb-5 o-auto | lh-1 | ls-none bwidth-1 bstyle-dashed bcolor-neutral-500 btwidth-0 brwidth-0" d-flex="xs,sm" fd-column="xs,sm" fw-wrap="xs,sm" columns-3="md" columns-2="sm" maxh-300px="sm" maxh-200px="xs">
+                        <li class="d-flex">
+                            <a href="#installation" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Installation
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#en-local" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                En local
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#sur-cdn" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Sur CDN
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#usage" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Usage
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#callback-anchor" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Callback anchor
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#callback-personnalis" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Callback personnalisé
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#mthode-update" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                Méthode update
+                            </a>
+                        </li>
+                        <li class="d-flex">
+                            <a href="#api" class="pl-5 pt-1 pb-1 | fs-4 lsp-3 lh-5 fvs-wght-400 | blwidth-1 blstyle-dashed bcolor-neutral-500">
+                                API
+                            </a>
+                        </li></ol>
                     </details>
                 
             </header>
-            <p><a href="https://github.com/ita-design-system/c-scrollspy.js/releases"><img src="/c-scrollspy.js/c-scrollspy-uUwJF9FFth-__145__.svg" alt="GitHub release (latest by date)" loading="lazy" decoding="async" width="145" height="28"></a></p>
-<aside class="d-flex | sandbox" fd-column="xs,sm" gap-2="xs,sm" ai-start="xs,sm" o-hidden="md" pl-9="md" pr-9="md" pl-5="xs,sm" pr-5="xs,sm">
+            <aside class="d-flex | sandbox" fd-column="xs,sm" gap-2="xs,sm" ai-start="xs,sm" o-hidden="md" pl-9="md" pr-9="md" pl-5="xs,sm" pr-5="xs,sm">
 <div class="d-flex | p-1 | bc-primary-200 brad-2" d-none="md">
 <button type="button" class="d-flex | pt-2 pb-2 pl-5 pr-5 | fvs-wght-400 fs-2 tt-uppercase | c-primary-900 bc-0 b-0 cur-pointer | sandbox__tab" data-name="code">
 Code
@@ -428,8 +459,8 @@ Démo
 &lt;/html&gt;</code>
 </pre>
 <div class="d-flex jc-center ai-center | pos-absolute top-0 left-0 | w-100 h-100 | sandbox__enable_wrapper" style="background-color: rgba(0,0,0,0.5)">
-<input type="checkbox" id="znCCrNt2_code" value="" class="pos-absolute | opa-0 | sandbox__enable_switch" checked="">
-<label for="znCCrNt2_code" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
+<input type="checkbox" id="0KYF4mwg_code" value="" class="pos-absolute | opa-0 | sandbox__enable_switch">
+<label for="0KYF4mwg_code" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
 <span class="icon-play"></span>
 Activer
 </label>
@@ -447,7 +478,7 @@ Activer
 <span class="fvs-wght-400 | c-neutral-300">Ouvrir</span>
 <span class="icon-arrow-square-out c-neutral-500"></span>
 </a>
-<div class="d-flex gap-5">
+<div class="d-flex gap-7">
 <button type="button" class="d-flex ai-center | p-0 | fvs-wght-400 fs-2 tt-uppercase | bc-0 c-neutral-300 b-0 cur-pointer | sandbox__reload">
 <span class="o-hidden | to-ellipsis ws-nowrap">Recharger</span>
 </button>
@@ -459,8 +490,8 @@ Activer
 <div class="d-flex | pos-relative">
 <iframe src="/c-scrollspy.js/sandboxes/1/" loading="lazy" class="w-100 h-500px | b-0 bc-neutral-100 | sandbox__iframe"></iframe>
 <div class="d-flex jc-center ai-center | pos-absolute top-0 left-0 | w-100 h-100 | sandbox__enable_wrapper" style="background-color: rgba(0,0,0,0.5)">
-<input type="checkbox" id="znCCrNt2_iframe" value="" class="pos-absolute | opa-0 | sandbox__enable_switch" checked="">
-<label for="znCCrNt2_iframe" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
+<input type="checkbox" id="0KYF4mwg_iframe" value="" class="pos-absolute | opa-0 | sandbox__enable_switch">
+<label for="0KYF4mwg_iframe" class="d-flex ai-center gap-1 | p-5 | fvs-wght-500 tt-uppercase | bc-neutral-900 brad-2 cur-pointer">
 <span class="icon-play"></span> Activer
 </label>
 </div>
@@ -472,27 +503,27 @@ Activer
 </div>
 </aside>
 
-                    <h2 id="installation" pl-9="xs,sm">
-                        <a href="#installation" title="Installation" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Installation</h2>
+                        <h2 id="installation" pl-9="xs,sm">
+                            <a href="#installation" title="Installation" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Installation</h2>
 <p>Il est recommandé de placer les fichiers dans cet ordre avant la balise fin de body.</p>
 
-                    <h3 id="en-local" pl-9="xs,sm">
-                        <a href="#en-local" title="En local" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                En local</h3>
+                        <h3 id="en-local" pl-9="xs,sm">
+                            <a href="#en-local" title="En local" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    En local</h3>
 <pre><code class="language-html">&lt;script src=&quot;/path/to/c-scrollspy.js&quot;&gt;&lt;/script&gt; &lt;!-- obligatoire --&gt;
 &lt;script src=&quot;/path/to/c-scrollspy-callbacks.js&quot;&gt;&lt;/script&gt; &lt;!-- optionnel --&gt;
 </code></pre>
 
-                    <h3 id="sur-cdn" pl-9="xs,sm">
-                        <a href="#sur-cdn" title="Sur CDN" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Sur CDN</h3>
+                        <h3 id="sur-cdn" pl-9="xs,sm">
+                            <a href="#sur-cdn" title="Sur CDN" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Sur CDN</h3>
 <p>Via <a href="https://www.jsdelivr.com/">https://www.jsdelivr.com/</a></p>
 <p>Version la plus récente:</p>
 <pre><code class="language-html">https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.js
@@ -511,19 +542,19 @@ Activer
 https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.min.js
 </code></pre>
 
-                    <h2 id="usage" pl-9="xs,sm">
-                        <a href="#usage" title="Usage" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Usage</h2>
+                        <h2 id="usage" pl-9="xs,sm">
+                            <a href="#usage" title="Usage" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Usage</h2>
 <p>c-scrollspy fonctionne avec <a href="https://developer.mozilla.org/fr/docs/Web/API/IntersectionObserver">l'API de IntersectionObserver</a> et déclenche des callbacks selon les seuils de passages spécifiés dans la vue. Spécifier le nom du callback dans l'attribut <code>c-scrollspy=&quot;NAME_OF_THE_CALLBACK&quot;</code>. c-scrollspy est livré avec un callback nommé <code>anchor</code> (le cas le plus courant). Il est possible de créer et d'utiliser vos propres callbacks.</p>
 <p><strong>Chaque callback dispose de ses propres paramètres</strong></p>
 
-                    <h2 id="callback-anchor" pl-9="xs,sm">
-                        <a href="#callback-anchor" title="Callback anchor" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Callback anchor</h2>
+                        <h2 id="callback-anchor" pl-9="xs,sm">
+                            <a href="#callback-anchor" title="Callback anchor" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Callback anchor</h2>
 <p>Avec le callback <code>anchor</code> (toujours inclus dans c-scrollspy.js), lorsque l'élément passe dans la fenêtre de visualisation, la classe des liens qui pointent vers cet élément est remplacée par &quot;active&quot;.</p>
 <p><strong>L'attribut id est obligatoire sur l'élément observé</strong></p>
 <p>Il est possible de spécifier la classe de remplacement avec l'attribut <code>data-active-class=&quot;...&quot;</code></p>
@@ -558,11 +589,11 @@ https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scro
 &lt;/section&gt;
 </code></pre>
 
-                    <h2 id="callback-personnalis" pl-9="xs,sm">
-                        <a href="#callback-personnalis" title="Callback personnalisé" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Callback personnalisé</h2>
+                        <h2 id="callback-personnalis" pl-9="xs,sm">
+                            <a href="#callback-personnalis" title="Callback personnalisé" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Callback personnalisé</h2>
 <p>L'objet cScrollspyCallbacks est disponible quand c-scrollspy.js est instancié sur le document. Vous pouvez écrire et utiliser vos propres callbacks en fonction de vos besoins.</p>
 <pre><code class="language-javascript">// Minimal
 cScrollspyCallbacks.myCustomCallbackName = {
@@ -599,20 +630,20 @@ cScrollspyCallbacks.multipleThesholds = {
 }
 </code></pre>
 
-                    <h2 id="mthode-update" pl-9="xs,sm">
-                        <a href="#mthode-update" title="Méthode update" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                Méthode update</h2>
+                        <h2 id="mthode-update" pl-9="xs,sm">
+                            <a href="#mthode-update" title="Méthode update" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    Méthode update</h2>
 <p>Indispensable pour démarrer l'application, instancie les IntersectionObserver, s'exécute automatiquement sur le <code>DOMReady</code> et peut être invoqué à tout moment, à chaque changement de DOM.</p>
 <pre><code class="language-javascript">cScrollspy.update();
 </code></pre>
 
-                    <h2 id="api" pl-9="xs,sm">
-                        <a href="#api" title="API" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1" ml-3="xs,sm">
-                            <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
-                        </a>
-                API</h2>
+                        <h2 id="api" pl-9="xs,sm">
+                            <a href="#api" title="API" class="pos-absolute top-50 left-0 t-tY-50 | p-4 ml-1 | td-none | brad-4 bc-neutral-100 bwidth-1 bstyle-dashed bcolor-neutral-500 __hover-1 __soft-shadow" ml-3="xs,sm">
+                                <span class="icon-link-simple | pos-absolute top-50 left-50 t-tY-50 t-tX-50 | fs-4"></span>
+                            </a>
+                    API</h2>
 <p>Toutes les instances de c-scrollspy sont placées dans <code>cScrollspy.instances[ID_DE_L_INSTANCE]</code>. <code>ID_DE_L_INSTANCE</code> est l'id de l'élément s'il est présent, s'il est absent, c-scrollspy applique un id préfixé de <code>cspy_</code> suivi de l'index de l'instance.</p>
 <pre><code class="language-javascript">// Élément DOM traqué
 cScrollspy.instances[ID_DE_L_INSTANCE].el;
@@ -620,11 +651,11 @@ cScrollspy.instances[ID_DE_L_INSTANCE].el;
 cScrollspy.instances[ID_DE_L_INSTANCE].io;
 </code></pre>
 
-            <footer class="minh-100vh">
+            <footer class="minh-100vh mt-10">
                 <div class="pt-11 | bwidth-1 bstyle-dashed bcolor-neutral-500 btwidth-0 brwidth-0"></div>
                 <p class="mt-5 mb-0 | fs-2">
                     <a href="https://github.com/ita-design-system/eleventy-libdoc" target="_blank" class="td-none">
-                        11ty LibDoc 0.1.0
+                        11ty LibDoc 0.3.0
                     </a>
                 </p>
             </footer>
