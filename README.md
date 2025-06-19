@@ -25,32 +25,32 @@ Via [https://www.jsdelivr.com/](https://www.jsdelivr.com/)
 Version la plus récente:
 
 ```html
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@main/assets/c-scrollspy.js
 ```
 
 Version la plus récente minifiée:
 
 ```html
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js/ui/js/c-scrollspy.min.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@main/assets/c-scrollspy.min.js
 ```
 
 Typologie avec numéro de version:
 
 ```html
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/assets/c-scrollspy.js
 ```
 
 Typologie numéro de version + minification automatique:
 
 ```html
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/ui/js/c-scrollspy.min.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@<TAG_VERSION>/assets/c-scrollspy.min.js
 ```
 
 Exemple v0.1.0:
 
 ```html
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.js
-https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@v0.1.0/ui/js/c-scrollspy.min.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@0.1.0/assets/c-scrollspy.js
+https://cdn.jsdelivr.net/gh/ita-design-system/c-scrollspy.js@0.1.0/assets/c-scrollspy.min.js
 ```
 
 ## Usage
