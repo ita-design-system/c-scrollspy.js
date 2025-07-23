@@ -19,7 +19,6 @@
     "blogDescription": "Description du blog",
     "blogAuthor": "c-scrollspy.js Team",
     "blogSlug": "blog",
-    "htmlBasePathPrefix": "/c-scrollspy.js/",
     "hljsLanguages": [
         "xml",
         "javascript",
