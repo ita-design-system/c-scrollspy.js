@@ -5,8 +5,6 @@ layout: libdoc_page.liquid
 permalink: index.html
 date: git Last Modified
 ---
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4646b91d-dbc1-47ce-b82a-a0acba13cb05/deploy-status)](https://app.netlify.com/projects/c-scrollspyjs/deploys)
-
 {% include 'sandbox' path: '/sandboxes/1/index.html', title: 'Démo' %}
 
 ## Installation
